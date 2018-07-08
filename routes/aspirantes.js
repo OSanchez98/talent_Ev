@@ -26,13 +26,13 @@ router.get('/users', function (req, res) {
 /* Creamos un nuevo usuario */
 router.post("/", function (req, res) {
     var userData = {
-        idUser_Aspirante: req.query.idUser_Aspirante,
-        Contrasena: req.query.Contrasena,
-        Nombre: req.query.Nombre,
-        Apellido_pat: req.query.Apellido_pat,
-        Apellido_mat: req.query.Apellido_mat,
-        Descripcion: req.query.Descripcion,
-        tipo_idTipo: req.query.tipo_idTipo,
+        idUser_Aspirante: req.body.idUser_Aspirante,
+        Contrasena: req.body.Contrasena,
+        Nombre: req.body.Nombre,
+        Apellido_pat: req.body.Apellido_pat,
+        Apellido_mat: req.body.Apellido_mat,
+        Descripcion: req.body.Descripcion,
+        tipo_idTipo: req.body.tipo_idTipo,
     };
     console.log(userData);
     var data = "'" + userData.idUser_Aspirante +"',"+
@@ -53,7 +53,6 @@ router.post("/", function (req, res) {
 /* Actualizamos un usuario existente */
 router.put('/', function (req, res) {
     var userData = {
-        idUser_Aspirante: req.query.idUser_Aspirante,
         Contrasena: req.query.Contrasena,
         Nombre: req.query.Nombre,
         Apellido_pat: req.query.Apellido_pat,
@@ -61,14 +60,14 @@ router.put('/', function (req, res) {
         Descripcion: req.query.Descripcion,
         tipo_idTipo: req.query.tipo_idTipo,
     };
-    var set = "idUser_Aspirante='"+ userData.idUser_Aspirante +"',"+
+    var set = 
         "Contrasena='"+ userData.Contrasena +"',"+
         "Nombre='" + userData.Nombre + "'," +
         "Apellido_pat='" + userData.Apellido_pat + "'," +
         "Apellido_mat='" + userData.Apellido_mat + "'," +
         "Descripcion='" + userData.Descripcion + "'," +
         "tipo_idTipo='" + userData.tipo_idTipo + "'" ;
-    var where = 'idUser_Aspirante=' + req.query.id;
+    var where = "idUser_Aspirante='" + req.query.idUser_Aspirante+"'";
     DbConnect.update(table, set, where, function (error, data) {
         if (error == null)
             res.json({ "status": "ok" });
@@ -76,5 +75,21 @@ router.put('/', function (req, res) {
             res.json(404, { "status": "notExist", "error": error });
     });
 });
+
+/*ELIMINAR ASPIRANTE
+router.delete('/:idUser_Aspirante', function (req, res) {
+    var idUser_Aspirante = req.params.idUser_Aspirante;
+    if (idUser_Aspirante != null) {
+        var where = " idUser_Aspirante="+idUser_Aspirante;        
+        DbConnect.delete(table, where, function (error, data) {
+            if (error == null)
+                res.json({ status: ok });
+            else
+                res.json(404, { "msg": "notExist", "error": error });
+        });
+    }
+    else
+        res.json(500, { "msg": "The id must be numeric" });
+});*/
 
 module.exports = router;
