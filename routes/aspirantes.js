@@ -6,7 +6,7 @@ var DbConnect = require('../DbConnect');
 var primary = "`idUser_Aspirante`";
 var table = "user_aspirante";
 var colums = "`Contrasena`,`Nombre`,`Apellido_pat`,`Apellido_mat`,`Descripcion`,`tipo_idTipo`";
-var columsall = "`idUser_Aspirante,`Contrasena`,`Nombre`,`Apellido_pat`,`Apellido_mat`,`Descripcion`,`tipo_idTipo`";
+//var columsall = "`idUser_Aspirante,`Contrasena`,`Nombre`,`Apellido_pat`,`Apellido_mat`,`Descripcion`,`tipo_idTipo`";
 
 //Obtener todos los eventos
 router.get('/filt', function (req, res, next) {
@@ -53,12 +53,12 @@ router.post("/", function (req, res) {
 /* Actualizamos un usuario existente */
 router.put('/', function (req, res) {
     var userData = {
-        Contrasena: req.query.Contrasena,
-        Nombre: req.query.Nombre,
-        Apellido_pat: req.query.Apellido_pat,
-        Apellido_mat: req.query.Apellido_mat,
-        Descripcion: req.query.Descripcion,
-        tipo_idTipo: req.query.tipo_idTipo,
+        Contrasena: req.body.Contrasena,
+        Nombre: req.body.Nombre,
+        Apellido_pat: req.body.Apellido_pat,
+        Apellido_mat: req.body.Apellido_mat,
+        Descripcion: req.body.Descripcion,
+        tipo_idTipo: req.body.tipo_idTipo,
     };
     var set = 
         "Contrasena='"+ userData.Contrasena +"',"+
