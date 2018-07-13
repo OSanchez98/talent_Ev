@@ -8,8 +8,11 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var event = require('./routes/events');
 var encuesta = require('./routes/encuesta');
+var personalidad = require('./routes/personalidad');
 var aspirantes = require('./routes/aspirantes');
 var checklist = require('./routes/checklist');
+var AreaEtiquetas = require('./routes/AreaEtiquetas');
+var relAreaEtiq = require('./routes/Relacion');
 
 
 var app = express();
@@ -29,7 +32,11 @@ app.use('/users', usersRouter);
 app.use('/events', event);
 app.use('/list',checklist);
 app.use('/encuesta',encuesta);
+app.use('/pers',personalidad);
 app.use('/aspirantes',aspirantes);
+app.use('/AreaEtiquetas',AreaEtiquetas);
+app.use('/EtiqName',relAreaEtiq);
+
 
 
 

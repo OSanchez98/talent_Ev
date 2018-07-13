@@ -27,9 +27,9 @@ router.get('/', function (req, res) {
 router.get('/:id', function (req, res) {
     var id = req.params.id;
     if (id != null) {
-        var where = " idUser_Reclutador=" + id;
+        var where = " idUser_Reclutador="+id;
         DbConnect.read(table, thcolumns, where, function (error, data) {
-            if (typeof data !== 'undefined' && data.length > 0)
+        if (typeof data !== 'undefined' /*&& data.length > 0*/)
                 res.json(data);
             else
                 res.json(404, { "msg": "notExist", "error": error });
