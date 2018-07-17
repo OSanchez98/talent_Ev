@@ -43,6 +43,14 @@ crud.relation = function(table1,table2,columns,on,where,callback)
         sql += ' ON ' + on + ' WHERE ' +where;
    Query(sql, callback);
 }
+crud.relationTwo = function(table1,coltab1,table2,coltab2,on,where,callback)
+{
+    if (!connection) return;
+    var sql = 'SELECT '+table1+'.'+ coltab1 + coltab2+' FROM ' + table1 +' LEFT JOIN '+table2;
+    if ((on != null && on != "") || (where != null & where !=""))
+        sql += ' ON ' + on+ ' WHERE ' +where;
+   Query(sql, callback);
+}
 
 function Query(sql, callback) {
     connection.query(sql, function (error, result) {
