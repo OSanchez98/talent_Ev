@@ -10,6 +10,7 @@ var event = require('./routes/events');
 var encuesta = require('./routes/encuesta');
 var personalidad = require('./routes/personalidad');
 var aspirantes = require('./routes/aspirantes');
+var asistenciaAsp = require('./routes/asistenciaAsp');
 var checklist = require('./routes/checklist');
 var AreaEtiquetas = require('./routes/AreaEtiquetas');
 var relAreaEtiq = require('./routes/Relacion');
@@ -36,13 +37,17 @@ app.use('/pers',personalidad);
 app.use('/aspirantes',aspirantes);
 app.use('/AreaEtiquetas',AreaEtiquetas);
 app.use('/EtiqName',relAreaEtiq);
-
+app.use('/asistAsp',asistenciaAsp);
 
 
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
+  console.log(req);
+  console.log(res);
+  
   next(createError(404));
+
 });
 
 // error handler
@@ -53,6 +58,9 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
+  console.log(res);
+  
+
   res.render('error');
 });
 

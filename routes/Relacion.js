@@ -40,7 +40,7 @@ router.get('/',function(req,res){
      if (id != null) {
          var on =table1+"."+primarytab1+"="+table2+"."+primarytab2;
          var where = table2+"."+columns2+"=" + id ;
-         DbConnect.relation(table1,table2,columns1,on,where, function (error, data) {
+         DbConnect.relation(table1,table2,columns1,primarytab1,on,where, function (error, data) {
              if (typeof data !== 'undefined' && data.length > 0)
                  res.json(data);
              else

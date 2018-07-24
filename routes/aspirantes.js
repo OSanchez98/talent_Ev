@@ -6,7 +6,7 @@ var DbConnect = require('../DbConnect');
 var primary = "`idUser_Aspirante`";
 var table = "user_aspirante";
 var colums = "`Contrasena`,`Nombre`,`Apellido_pat`,`Apellido_mat`,`Descripcion`,`tipo_idTipo`";
-//var columsall = "`idUser_Aspirante,`Contrasena`,`Nombre`,`Apellido_pat`,`Apellido_mat`,`Descripcion`,`tipo_idTipo`";
+var columsdate= "`Nombre`,`Apellido_pat`,`Apellido_mat`,`Descripcion`,`tipo_idTipo`";
 
 //Obtener todos los eventos
 router.get('/filt', function (req, res, next) {
@@ -22,6 +22,26 @@ router.get('/users', function (req, res) {
             res.json(404, { "status": "notCreate", "error": error });
     });
 });
+
+
+//obtenemos con where
+router.get('/:id', function (req, res) {
+    var id = req.params.id;
+    if (id != null) {
+        var where = " idUser_Aspirante="+id;
+        DbConnect.read(table, columsdate, where, function (error, data) {
+        if (typeof data !== 'undefined' /*&& data.length > 0*/)
+                res.json(data);
+            else
+                res.json(404, { "msg": "notExist", "error": error });
+        });
+    }
+    else
+      
+        res.json(500, { "msg": "The id must be numeric" });
+});
+
+//
 
 /* Creamos un nuevo usuario */
 router.post("/", function (req, res) {
@@ -46,7 +66,8 @@ router.post("/", function (req, res) {
         if (data)
             res.json({ status: "ok" });
         else
-            res.json(404, { "status": "notInsert", "error": error });
+            //console.log(error); comente esto porque era lo que imprimia el error
+            res.sendStatus(404);
     });
 });
 

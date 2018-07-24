@@ -35,10 +35,10 @@ crud.delete = function (table, where, callback) {
     Query(sql, callback);
 }
 
-crud.relation = function(table1,table2,columns,on,where,callback)
+crud.relation = function(table1,table2,col1,col2,on,where,callback)
 {
     if (!connection) return;
-    var sql = 'SELECT '+table1+'.'+ columns + ' FROM ' + table1 +' INNER JOIN '+table2;
+    var sql = 'SELECT '+table1+'.'+ col1 +','+table1+'.'+col2+ ' FROM ' + table1 +' INNER JOIN '+table2;
     if ((on != null && on != "") || (where != null & where !=""))
         sql += ' ON ' + on + ' WHERE ' +where;
    Query(sql, callback);
